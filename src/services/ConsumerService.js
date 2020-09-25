@@ -1,4 +1,4 @@
-const queue = require("../services/queueService");
+const queue = require("./QueueService");
 const mongoose = require('mongoose');
 const likesModel = require('../models/LikesModel');
 

@@ -1,0 +1,61 @@
+{
+	"info": {
+		"_postman_id": "590256e5-b736-415c-b96b-b451d76edd4d",
+		"name": "LikeOperation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Store Like",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPost\": 9878,\r\n    \"idUser\": 8745\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/likes",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"likes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Like",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/likes?idPost=9878",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"likes"
+					],
+					"query": [
+						{
+							"key": "idPost",
+							"value": "9878"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

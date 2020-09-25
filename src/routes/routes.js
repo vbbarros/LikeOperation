@@ -1,9 +1,9 @@
 const router = require('express').Router()
-const queue = require("../services/queueService");
+const queue = require("../services/QueueService");
+const likesController = require("../controllers/LikesController")
 
-router.post('/likes', (req, res) => {
-    queue.sendToQueue("newLikes", req.body);
-    res.json({message: 'Your request will be processed!'});
-});
+router.get('/likes', likesController.findLikes)
+
+router.post('/likes', likesController.storeLike)
 
 module.exports = router;

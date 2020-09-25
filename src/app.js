@@ -6,7 +6,7 @@ const debug = require('debug')('likebutton:server');
 const http = require('http');
 const router = require('./routes/routes');
 
-const likesConsumer = require('./consumers/likesConsumer')
+const consumerService = require('./services/ConsumerService')
 
 const app = express();
 
@@ -45,7 +45,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-likesConsumer.consume()
+consumerService.consume()
 
 
 var server = http.createServer(app);
