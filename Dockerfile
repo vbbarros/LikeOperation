@@ -23,6 +23,7 @@ COPY . .
 #expose port 3000 to mount it to another port in local machine 
 EXPOSE 3000
 
+#using wait to run the container after rabbitMQ is running
 ENV WAIT_VERSION 2.7.2
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/$WAIT_VERSION/wait /wait
 RUN chmod +x /wait
