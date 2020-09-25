@@ -16,7 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', router);
-app.set('view engine', 'pug');
 
 
 // catch 404 and forward to error handler

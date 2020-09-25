@@ -1,12 +1,9 @@
 const queue = require("../services/queueService");
 const mongoose = require('mongoose');
-const likesModel = require('../models/LikesModel')
+const likesModel = require('../models/LikesModel');
 
 const consume = async() => {
     queue.consume("newLikes", callback => {
-        // if(!db){
-        //     db = connectDb()
-        // }
         const json = JSON.parse(callback.content.toString())
         likesModel.create(json)
         console.log("processing " + callback.content.toString());
@@ -25,7 +22,7 @@ const connectDb = () => {
     });
 }
 
-var db = connectDb()
+connectDb()
 
 module.exports = {
     consume

@@ -1,29 +1,8 @@
-# Docker-compose for Graylog
-
-# rabbit1:
-#   image: "rabbitmq:3-management"
-#   hostname: "rabbit1"
-#   environment:
-#     RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
-#     RABBITMQ_DEFAULT_USER: "rabbitmq"
-#     RABBITMQ_DEFAULT_PASS: "rabbitmq"
-#     RABBITMQ_DEFAULT_VHOST: "/"
-#   ports:
-#     - "15672:15672"
-#     - "5672:5672"
-#   labels:
-#     NAME: "rabbitmq1"
-#   volumes:
-#     - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
-    #- "./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro"
-    #- "./autocluster-0.4.1.ez:/usr/lib/rabbitmq/lib/rabbitmq_server-3.5.5/plugins/autocluster-0.4.1.ez"
-
 version: '3.6'
 services:
 
   express:
     build: ./
-    # entrypoint: ./.docker/entrypoint.sh
     container_name: express
     environment:
       - CHOKIDAR_USEPOLLING=true
@@ -34,13 +13,11 @@ services:
     ports:
       - 3001:3000
     volumes:
-      # - ./src:/home/node/express
       - .:/src
     restart: on-failure
     depends_on:
       - rabbitmq
     command: sh -c "/wait && node src/app.js"
-    # command: ["CMD", "curl", "-f", "http://localhost:15672"]
   
   mongo:
     container_name: mongo
