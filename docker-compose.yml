@@ -1,0 +1,64 @@
+# Docker-compose for Graylog
+
+# rabbit1:
+#   image: "rabbitmq:3-management"
+#   hostname: "rabbit1"
+#   environment:
+#     RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+#     RABBITMQ_DEFAULT_USER: "rabbitmq"
+#     RABBITMQ_DEFAULT_PASS: "rabbitmq"
+#     RABBITMQ_DEFAULT_VHOST: "/"
+#   ports:
+#     - "15672:15672"
+#     - "5672:5672"
+#   labels:
+#     NAME: "rabbitmq1"
+#   volumes:
+#     - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    #- "./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro"
+    #- "./autocluster-0.4.1.ez:/usr/lib/rabbitmq/lib/rabbitmq_server-3.5.5/plugins/autocluster-0.4.1.ez"
+
+version: '3.6'
+services:
+
+  express:
+    build: ./
+    # entrypoint: ./.docker/entrypoint.sh
+    container_name: express
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WAIT_HOSTS=rabbitmq:5672
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=10
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+    ports:
+      - 3001:3000
+    volumes:
+      # - ./src:/home/node/express
+      - .:/src
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+    command: sh -c "/wait && node src/app.js"
+    # command: ["CMD", "curl", "-f", "http://localhost:15672"]
+  
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+
+  rabbitmq:
+    image: "rabbitmq:3.8-management-alpine"
+    container_name: nodejs-rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - "./.rabbitmq_data:/var/lib/rabbitmq/mnesia"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
