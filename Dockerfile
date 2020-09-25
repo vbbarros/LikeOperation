@@ -1,9 +1,6 @@
 #pull a node image from docker hub
 FROM node:12-slim
 
-# install package.json modules in container
-RUN yarn install
-
 #set the working dir to /app
 # WORKDIR /opt
 WORKDIR /usr/src

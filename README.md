@@ -37,7 +37,7 @@ A API fica exposta no endereço:
 # Objetivos
 ### O objetivo aqui, foi tentar criar algo simples e robusto, para conseguir ter uma boa performance e lidar com um número massivo de requisições. Para isso optei por subir um serviço de mensageria (RabbitMQ), já que o eventLoop do Node trabalha com single Thread, e pode nos limitar ao processar tarefas.
 ------------------
-#### Ps: Foquei mais na criação do ambiente como um todo, para ter uma solução mais robusta. O banco não foi todo desenhado, fiz somente um schema para conseguir demonstrar a inserção de um "like" e a busca do total de likes.
+#### Ps: Foquei mais na criação do ambiente como um todo, para ter uma solução mais robusta. O banco não foi todo desenhado, fiz somente um schema para conseguir demonstrar a inserção de um "like" e a busca do total de likes. Considerei que o número de likes por usuário não é limitado
 
 # Outras Abordagens
 
